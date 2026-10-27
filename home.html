@@ -1,0 +1,50 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <span class="eyebrow">COMMUNITY SERVICE PROJECT</span>
+  <h1>{{ t.hero_title }}</h1>
+  <p>{{ t.hero_desc }}</p>
+  <a class="button light" href="#schemes">{{ t.explore }}</a>
+  <a class="button outline" href="{{ url_for('register') }}">{{ t.register }}</a>
+</section>
+
+<section class="search-panel">
+  <form method="get" action="{{ url_for('home') }}">
+    <label for="q">{{ t.search }}</label>
+    <div class="search-row">
+      <input id="q" name="q" value="{{ query }}" placeholder="{{ t.search_placeholder }}">
+      <button class="button" type="submit">{{ t.search }}</button>
+    </div>
+    <div class="filters">
+      <a href="{{ url_for('home') }}">{{ t.all }}</a>
+      {% for key in ['students', 'farmers', 'women', 'senior'] %}
+        <a href="{{ url_for('home', category=key) }}">{{ t[key] }}</a>
+      {% endfor %}
+    </div>
+  </form>
+</section>
+
+<section id="schemes">
+  <h2>{{ t.results }} ({{ schemes|length }})</h2>
+  {% if schemes %}
+    <div class="grid">
+      {% for scheme in schemes %}
+        <article class="scheme-card">
+          <span class="pill">{{ t[scheme.category] }}</span>
+          <h3>{{ scheme.name[lang] }}</h3>
+          <p>{{ scheme.description[lang] }}</p>
+          <a class="button" href="{{ url_for('scheme_detail', scheme_id=scheme.id) }}">{{ t.view }}</a>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>{{ t.no_results }}</p>
+  {% endif %}
+</section>
+
+<section id="about" class="about">
+  <h2>{{ t.about_title }}</h2>
+  <p>{{ t.about_desc }}</p>
+</section>
+{% endblock %}

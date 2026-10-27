@@ -1,0 +1,44 @@
+<!-- templates/register.html -->
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-card wide">
+  <h1>{{ t.register }}</h1>
+  <form method="post">
+    <div class="form-grid">
+      <div>
+        <label for="full_name">{{ t.name }}</label>
+        <input id="full_name" name="full_name" required>
+      </div>
+      <div>
+        <label for="username">{{ t.username }}</label>
+        <input id="username" name="username" required>
+      </div>
+      <div>
+        <label for="password">{{ t.password }} (8+ characters)</label>
+        <input id="password" type="password" name="password" minlength="8" required>
+      </div>
+      <div>
+        <label for="phone">{{ t.phone }}</label>
+        <input id="phone" name="phone" type="tel">
+      </div>
+      <div>
+        <label for="category">{{ t.category }}</label>
+        <select id="category" name="category">
+          <option value="">Prefer not to say</option>
+          <option value="SC">SC</option>
+          <option value="ST">ST</option>
+          <option value="BC">BC</option>
+          <option value="OC">OC</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="annual_income">{{ t.income }}</label>
+        <input id="annual_income" name="annual_income" type="number" min="0" step="0.01">
+      </div>
+    </div>
+    <button class="button full" type="submit">{{ t.create }}</button>
+  </form>
+  <p>{{ t.login }}? <a href="{{ url_for('login') }}">{{ t.login }}</a></p>
+</section>
+{% endblock %}

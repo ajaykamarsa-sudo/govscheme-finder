@@ -1,0 +1,17 @@
+<!-- templates/login.html -->
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-card">
+  <h1>{{ t.login }}</h1>
+  <form method="post">
+    <label for="username">{{ t.username }}</label>
+    <input id="username" name="username" autocomplete="username" required>
+
+    <label for="password">{{ t.password }}</label>
+    <input id="password" type="password" name="password" autocomplete="current-password" required>
+
+    <button class="button full" type="submit">{{ t.login }}</button>
+  </form>
+  <p>{{ t.register }}? <a href="{{ url_for('register') }}">{{ t.create }}</a></p>
+</section>
+{% endblock %}

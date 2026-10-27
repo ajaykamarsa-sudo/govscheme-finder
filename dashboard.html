@@ -1,0 +1,31 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %}
+{% block content %}
+<section class="dashboard-hero">
+  <h1>{{ t.welcome }}, {{ user.full_name }}!</h1>
+  <p>{{ t.profile }}</p>
+</section>
+
+<div class="grid">
+  <section class="panel">
+    <h2>{{ t.profile }}</h2>
+    <p><strong>{{ t.name }}:</strong> {{ user.full_name }}</p>
+    <p><strong>{{ t.username }}:</strong> {{ user.username }}</p>
+    <p><strong>{{ t.phone }}:</strong> {{ user.phone or 'Not provided' }}</p>
+    <p><strong>{{ t.category }}:</strong> {{ user.category or 'Not provided' }}</p>
+    <p><strong>{{ t.income }}:</strong>
+      {% if user.annual_income is not none %}
+        ₹{{ "{:,.2f}".format(user.annual_income) }}
+      {% else %}Not provided{% endif %}
+    </p>
+  </section>
+  <section class="panel">
+    <h2>{{ t.explore }}</h2>
+    <p>Explore schemes and verify eligibility using official sources.</p>
+    <a class="button full" href="{{ url_for('home') }}">{{ t.schemes }}</a>
+    <form method="post" action="{{ url_for('logout') }}">
+      <button class="button full secondary" type="submit">{{ t.logout }}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

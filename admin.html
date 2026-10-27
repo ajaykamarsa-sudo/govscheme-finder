@@ -1,0 +1,58 @@
+
+{% extends "base.html" %}
+{% block title %}Admin | GovScheme Finder{% endblock %}
+
+{% block content %}
+<section class="dashboard-welcome">
+    <span class="eyebrow">ADMINISTRATION</span>
+    <h1>Admin dashboard</h1>
+    <p>Overview of registered users and available schemes.</p>
+</section>
+
+<section class="stats-grid">
+    <article class="stat-card">
+        <span>Registered users</span>
+        <strong>{{ users_count }}</strong>
+    </article>
+    <article class="stat-card">
+        <span>Total schemes</span>
+        <strong>{{ schemes_count }}</strong>
+    </article>
+</section>
+
+<section class="section">
+    <h2>Scheme directory</h2>
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Scheme</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for scheme in schemes %}
+                    <tr>
+                        <td>{{ scheme.name }}</td>
+                        <td>{{ scheme.category }}</td>
+                        <td>
+                            <span class="scheme-tag">
+                                {{ 'Active' if scheme.active else 'Inactive' }}
+                            </span>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">No schemes have been added.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p class="muted">
+        This starter page is read-only. Add protected create, edit and delete
+        routes before enabling scheme management.
+    </p>
+</section>
+{% endblock %}

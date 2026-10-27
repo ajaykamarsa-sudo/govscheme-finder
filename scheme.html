@@ -1,0 +1,24 @@
+<!-- templates/scheme.html -->
+{% extends "base.html" %}
+{% block content %}
+<a href="{{ url_for('home') }}">← {{ t.back }}</a>
+<section class="panel">
+  <span class="pill">{{ t[scheme.category] }}</span>
+  <h1>{{ scheme.name[lang] }}</h1>
+  <p>{{ scheme.description[lang] }}</p>
+  <a class="button" href="{{ scheme.url }}" target="_blank" rel="noopener noreferrer">{{ t.official }} ↗</a>
+</section>
+
+<div class="grid detail-grid">
+  {% for field in ['eligibility', 'benefits', 'documents', 'steps'] %}
+    <section class="panel">
+      <h2>{{ t[field] }}</h2>
+      {% if field == 'steps' %}
+        <ol>{% for item in scheme[field][lang] %}<li>{{ item }}</li>{% endfor %}</ol>
+      {% else %}
+        <ul>{% for item in scheme[field][lang] %}<li>{{ item }}</li>{% endfor %}</ul>
+      {% endif %}
+    </section>
+  {% endfor %}
+</div>
+{% endblock %}
